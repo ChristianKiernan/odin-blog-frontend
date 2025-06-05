@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { registerUser } from '../api/auth';
 
 export default function Register() {
 	const [form, setForm] = useState({ username: '', email: '', password: '' });
-	const navigate = useNavigate();
 	const [error, setError] = useState('');
+	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
@@ -16,7 +16,7 @@ export default function Register() {
 		setError('');
 
 		try {
-			await axios.post('http://localhost:5000/users/register', form);
+			await registerUser(form);
 			navigate('/login');
 		} catch (err) {
 			setError(err.response?.data?.message || 'Registration failed.');
