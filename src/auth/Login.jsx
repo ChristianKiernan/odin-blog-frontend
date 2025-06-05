@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { loginUser } from '../api/auth';
+import CenteredCard from '../components/CenteredCard';
 
 export default function Login() {
 	const [form, setForm] = useState({ username: '', password: '' });
@@ -27,7 +27,7 @@ export default function Login() {
 	};
 
 	return (
-		<div className='container mt-5'>
+		<CenteredCard>
 			<h2>Login</h2>
 			{error && <div className='alert alert-danger'>{error}</div>}
 			<form onSubmit={handleSubmit}>
@@ -47,8 +47,11 @@ export default function Login() {
 					placeholder='Password'
 					required
 				/>
-				<button className='btn btn-primary'>Login</button>
+				<button className='btn btn-primary w-100'>Login</button>
 			</form>
-		</div>
+			<p className='mt-3 text-center'>
+				Don’t have an account? <Link to='/register'>Register here</Link>
+			</p>
+		</CenteredCard>
 	);
 }

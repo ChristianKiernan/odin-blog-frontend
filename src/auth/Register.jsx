@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import CenteredCard from '../components/CenteredCard';
 import { registerUser } from '../api/auth';
 
 export default function Register() {
@@ -24,7 +25,7 @@ export default function Register() {
 	};
 
 	return (
-		<div className='container mt-5'>
+		<CenteredCard>
 			<h2>Register</h2>
 			{error && <div className='alert alert-danger'>{error}</div>}
 			<form onSubmit={handleSubmit}>
@@ -51,8 +52,11 @@ export default function Register() {
 					placeholder='Password'
 					required
 				/>
-				<button className='btn btn-primary'>Register</button>
+				<button className='btn btn-primary w-100'>Register</button>
 			</form>
-		</div>
+			<p className='mt-3 text-center'>
+				Already have an account? <Link to='/login'>Login here</Link>
+			</p>
+		</CenteredCard>
 	);
 }
