@@ -1,20 +1,37 @@
-import App from './App';
-import Home from './pages/Home';
 import Login from './auth/Login';
 import Register from './auth/Register';
+import Home from './pages/Home';
+import Layout from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute';
+import CreatePost from './pages/CreatePost'; 
 
 const routes = [
   {
     path: '/',
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
     children: [
-      { path: '/', element: <Home /> },
-      { path: '/login', element: <Login /> },
-      { path: '/register', element: <Register /> },
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: 'create',
+        element: <CreatePost />,
+      },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
   },
 ];
 
 export default routes;
-
-
