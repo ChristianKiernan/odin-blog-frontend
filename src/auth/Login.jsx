@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { loginUser } from '../api/auth';
 
 export default function Login() {
-	const [form, setForm] = useState({ email: '', password: '' });
+	const [form, setForm] = useState({ username: '', password: '' });
 	const [error, setError] = useState('');
 	const { login } = useAuth();
 	const navigate = useNavigate();
@@ -32,11 +32,11 @@ export default function Login() {
 			{error && <div className='alert alert-danger'>{error}</div>}
 			<form onSubmit={handleSubmit}>
 				<input
-					name='email'
-					type='email'
+					name='username'
+					type='text'
 					onChange={handleChange}
 					className='form-control mb-2'
-					placeholder='Email'
+					placeholder='Username'
 					required
 				/>
 				<input
