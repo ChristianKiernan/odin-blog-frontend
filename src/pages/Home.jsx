@@ -1,32 +1,39 @@
 import { useEffect, useState } from 'react';
 import { fetchPosts } from '../api/posts';
+import { useAuth } from '../context/AuthContext';
 
 export default function Home() {
-	const [posts, setPosts] = useState([]);
-	const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState([]);
+  const [error, setError] = useState('');
+  const { user } = useAuth();
 
-	useEffect(() => {
-		fetchPosts()
-			.then((data) => {
-				setPosts(data.posts || []);
-				setLoading(false);
-			})
-			.catch((err) => {
-				console.error('Failed to fetch posts:', err);
-				setLoading(false);
-			});
-	}, []);
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        const res = await fetchPosts(user?.token);
+        setPosts(res.data.posts);
+      } catch (err) {
+        console.error('Failed to fetch posts:', err);
+        setError('Failed to load posts');
+      }
+    };
 
-	if (loading) return <p>Loading posts...</p>;
+    if (user?.token) loadPosts();
+  }, [user]);
 
-	return (
-		<div className='container mt-4'>
-			<h2>Latest Posts</h2>
-			{posts.length === 0 ? (
-				<p>No posts available.</p>
-			) : (
-				posts.map((post) => <PostCard key={post.id} post={post} />)
-			)}
-		</div>
-	);
+  if (error) return <p className="text-danger">{error}</p>;
+  if (!posts.length) return <p>No posts found.</p>;
+
+  return (
+    <div>
+      <h2>Latest Posts</h2>
+      {posts.map((post) => (
+        <div key={post.id} className="card mb-3 p-3">
+          <h4>{post.title}</h4>
+          <p>{post.content}</p>
+          <small>by {post.author.username}</small>
+        </div>
+      ))}
+    </div>
+  );
 }
