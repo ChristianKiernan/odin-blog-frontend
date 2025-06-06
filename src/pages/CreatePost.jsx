@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { createPost } from '../api/posts';
-import Button from '../components/Button';
 
 export default function CreatePost() {
 	const [form, setForm] = useState({ title: '', content: '' });
@@ -26,52 +25,57 @@ export default function CreatePost() {
 	};
 
 	return (
-		<div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
-			<div className="bg-white p-6 rounded-lg shadow-md w-full max-w-xl">
-				<h2 className="text-2xl font-semibold mb-4">Create a New Post</h2>
+		<div className='min-h-screen flex items-center justify-center bg-gray-100 py-8 px-4'>
+			<div className='bg-white shadow-md rounded-lg w-full max-w-2xl p-6'>
+				<h2 className='text-2xl font-bold mb-6 text-gray-800'>
+					Create a New Post
+				</h2>
+
 				{error && (
-					<div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+					<div className='mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded'>
 						{error}
 					</div>
 				)}
+
 				<form onSubmit={(e) => e.preventDefault()}>
 					<input
-						type="text"
-						name="title"
-						placeholder="Title"
-						className="w-full p-3 border border-gray-300 rounded mb-4"
+						type='text'
+						name='title'
+						placeholder='Title'
+						className='border border-gray-300 rounded-md w-full p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400'
 						value={form.title}
 						onChange={handleChange}
 						required
 					/>
+
 					<textarea
-						name="content"
-						placeholder="Content"
-						className="w-full p-3 border border-gray-300 rounded mb-4"
-						rows="6"
+						name='content'
+						placeholder='Content'
+						rows='6'
+						className='border border-gray-300 rounded-md w-full p-3 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none'
 						value={form.content}
 						onChange={handleChange}
 						required
 					/>
-					<div className="flex gap-3">
-						<Button
-							variant="secondary"
-							type="button"
+
+					<div className='flex justify-end space-x-3'>
+						<button
+							type='button'
 							onClick={() => handleSubmit(false)}
+							className='bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md transition-colors'
 						>
 							Save as Draft
-						</Button>
-						<Button
-							variant="primary"
-							type="button"
+						</button>
+						<button
+							type='button'
 							onClick={() => handleSubmit(true)}
+							className='bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors'
 						>
 							Publish
-						</Button>
+						</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	);
 }
-
