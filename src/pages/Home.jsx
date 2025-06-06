@@ -21,19 +21,23 @@ export default function Home() {
     if (user?.token) loadPosts();
   }, [user]);
 
-  if (error) return <p className="text-danger">{error}</p>;
+  if (error) return <p className="text-red-600">{error}</p>;
   if (!posts.length) return <p>No posts found.</p>;
 
   return (
     <div>
-      <h2>Latest Posts</h2>
+      <h2 className="text-2xl font-semibold mb-4">Latest Posts</h2>
       {posts.map((post) => (
-        <div key={post.id} className="card mb-3 p-3">
-          <h4>{post.title}</h4>
-          <p>{post.content}</p>
-          <small>by {post.author.username}</small>
+        <div
+          key={post.id}
+          className="bg-white shadow rounded p-4 mb-4"
+        >
+          <h4 className="text-xl font-bold mb-2">{post.title}</h4>
+          <p className="mb-2">{post.content}</p>
+          <small className="text-gray-600">by {post.author.username}</small>
         </div>
       ))}
     </div>
   );
 }
+
