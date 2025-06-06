@@ -3,6 +3,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import CreatePost from './pages/CreatePost';
+import SavedPost from './pages/SavedPosts';
 import Login from './auth/Login';
 import Register from './auth/Register';
 
@@ -25,6 +26,7 @@ export default function App() {
         <Route index element={<Home />} />
         {/* “/create” => renders CreatePost */}
         <Route path="create" element={<CreatePost />} />
+		<Route path="saved" element={<SavedPost />} />
       </Route>
 
       {/* Public routes (no auth required) */}
