@@ -6,13 +6,6 @@ const usersApi = axios.create({
   baseURL: `${API_BASE_URL}/users`,
 });
 
-/**
- * Fetch drafts for a specific user.
- * @param {string} token   
- * @param {string} id  
- * @returns {Promise<Object>}                 
- */
-
 export const getDraftsByUser = async (token, id) => {
   const res = await usersApi.get(`/${id}`, {
     headers: {
