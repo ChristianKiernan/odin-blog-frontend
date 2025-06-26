@@ -8,7 +8,6 @@ export default function SavedPosts() {
 	const [error, setError] = useState('');
 
 	useEffect(() => {
-        console.log('SavedPosts → user =', user);
 		async function loadSaved() {
 			if (!user?.token) return;
 
