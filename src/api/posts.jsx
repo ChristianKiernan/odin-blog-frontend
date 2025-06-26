@@ -8,21 +8,25 @@ const postsApi = axios.create({
 
 //Get all published posts
 export const fetchPosts = async (token) => {
-  const res = await postsApi.get('/', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return res.data;
-};
-
-// Get single post by ID
-export const fetchPostById = async (id) => {
-	const res = await postsApi.get(`/${id}`);
+	const res = await postsApi.get('/', {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
 	return res.data;
 };
 
-// Create new post 
+// Get single post by ID
+export const fetchPostById = async (id, token) => {
+	const res = await postsApi.get(`/${id}`, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	return res.data;
+};
+
+// Create new post
 export const createPost = async (postData, token) => {
 	const res = await postsApi.post('/', postData, {
 		headers: {
@@ -32,7 +36,7 @@ export const createPost = async (postData, token) => {
 	return res.data;
 };
 
-// Update existing post 
+// Update existing post
 export const updatePost = async (id, postData, token) => {
 	const res = await postsApi.put(`/${id}`, postData, {
 		headers: {
@@ -42,7 +46,7 @@ export const updatePost = async (id, postData, token) => {
 	return res.data;
 };
 
-// Delete a post 
+// Delete a post
 export const deletePost = async (id, token) => {
 	const res = await postsApi.delete(`/${id}`, {
 		headers: {
