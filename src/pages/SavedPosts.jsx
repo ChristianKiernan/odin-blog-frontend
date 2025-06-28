@@ -25,7 +25,7 @@ export default function SavedPosts() {
 
 	if (error) {
 		return (
-			<div className='min-h-screen bg-gray-100 py-8 px-4'>
+			<div className='min-h-screen bg-gray-800 py-8 px-4'>
 				<div className='max-w-3xl mx-auto'>
 					<div className='mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded'>
 						{error}
@@ -36,7 +36,7 @@ export default function SavedPosts() {
 	}
 
 	return (
-		<div className='min-h-screen bg-gray-100 py-8 px-4'>
+		<div className='min-h-screen bg-gray-800 py-8 px-4'>
 			<div className='max-w-3xl mx-auto'>
 				<h2 className='text-2xl font-semibold mb-6 text-gray-800'>
 					Saved Posts (Drafts)
