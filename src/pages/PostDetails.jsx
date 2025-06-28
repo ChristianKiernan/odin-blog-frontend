@@ -22,93 +22,77 @@ export default function PostDetails() {
           res.post ||
           res;
         setPost(postData);
-      } catch (err) {
-        console.error('Error fetching post:', err);
+      } catch {
         setError('Failed to load post.');
       } finally {
         setLoading(false);
       }
     }
-    if (user?.token) {
-      loadPost();
-    }
+    if (user?.token) loadPost();
   }, [id, user]);
 
   const handleDeletePost = async () => {
-    if (!window.confirm('Are you sure you want to delete this post?')) return;
+    if (!window.confirm('Are you sure you want to delete this post?'))
+      return;
     try {
       await deletePost(post.id, user.token);
-
-      // back to home after delete
-      navigate('/'); 
-    } catch (err) {
-      console.error('Delete post failed:', err);
+      navigate('/');
+    } catch {
       setError('Failed to delete post.');
     }
   };
 
-  if (loading) {
+  if (loading || error || !post) {
+    const msg = loading
+      ? 'Loading post…'
+      : error || 'Post not found.';
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p>Loading post…</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-red-600">{error}</p>
-      </div>
-    );
-  }
-
-  if (!post) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Post not found.</p>
+        <p className={error ? 'text-red-600' : ''}>{msg}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4">
-      <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
-        <h1 className="text-3xl font-bold mb-4 text-gray-800">
+    <div className="w-full max-w-3xl mx-auto px-6 py-8">
+      <div className="bg-white border border-gray-200 shadow-md rounded-xl p-8">
+        <h1 className="text-3xl font-extrabold text-gray-900 mb-2">
           {post.title}
         </h1>
-        <div className="text-sm text-gray-500 mb-6">
+        <div className="text-lg text-gray-700 mb-2 leading-relaxed">
+          {post.content}
+        </div>
+        {/* Author & date metadata now underneath the content */}
+        <div className="text-sm italic text-gray-500 mb-4">
           By {post.author?.username || 'Unknown'} on{' '}
           {new Date(post.createdAt).toLocaleString()}
         </div>
-        <div className="prose mb-6 text-gray-700">{post.content}</div>
 
+        {/* Edit/Delete actions */}
         {user?.id === post.author?.id && (
-          <div className="mt-4 space-x-4">
-            <Link
-              to={`/edit/${post.id}`}
-              className="text-blue-600 hover:underline"
+          <div className="flex space-x-2 mb-4">
+            <button
+              onClick={() => navigate(`/edit/${post.id}`)}
+              className="bg-blue-600 hover:bg-blue-700 text-white
+                         text-sm font-medium px-3 py-1 rounded transition"
             >
-              Edit Post
-            </Link>
+              Edit
+            </button>
             <button
               onClick={handleDeletePost}
-              className="text-red-600 hover:underline"
+              className="bg-red-600 hover:bg-red-700 text-white
+                         text-sm font-medium px-3 py-1 rounded transition"
             >
-              Delete Post
+              Delete
             </button>
           </div>
         )}
 
-        {error && (
-          <p className="text-red-600 mt-4">
-            {error}
-          </p>
-        )}
-      </div>
+        {/* Smooth separator */}
+        <hr className="border-t border-gray-200 mb-8" />
 
-      <div className="max-w-3xl mx-auto mt-8">
-        <CommentSection postId={post.id} />
+        {/* Comments */}
+        <CommentSection />
       </div>
     </div>
   );

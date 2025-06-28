@@ -17,7 +17,7 @@ export default function EditPost() {
 				const res = await fetchPostById(id, user.token);
 				const postData = res.data?.data?.post || res.data?.post || res;
                 
-				// redirect if not author
+				// Redirect if not author
 				if (user.id !== postData.author?.id) {
 					navigate('/');
 					return;
