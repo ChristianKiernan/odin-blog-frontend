@@ -12,10 +12,6 @@ import Register from './auth/Register';
 export default function App() {
 	return (
 		<Routes>
-			{/* 
-        All routes under “/” (Home, CreatePost) require a logged-in user. 
-        If no user, ProtectedRoute will redirect to /login. 
-      */}
 			<Route
 				path='/'
 				element={
@@ -24,19 +20,20 @@ export default function App() {
 					</ProtectedRoute>
 				}
 			>
-				{/* index => renders on “/” */}
 				<Route index element={<Home />} />
 				<Route path='create' element={<CreatePost />} />
 				<Route path='saved' element={<SavedPosts />} />
 				<Route path='posts/:id' element={<PostDetails />} />
-        <Route path="edit/:id" element={<EditPost />} />
+				<Route path='edit/:id' element={<EditPost />} />
 			</Route>
 
-			{/* Public routes (no auth required) */}
-			<Route path='/login' element={<Login />} />
-			<Route path='/register' element={<Register />} />
+			{/* Public routes */}
+			<Route element={<Layout />}>
+				<Route path='/login' element={<Login />} />
+				<Route path='/register' element={<Register />} />
+			</Route>
 
-			{/* Fallback: any other path redirects to “/” */}
+			{/* As a fallback, any other path redirects to “/” */}
 			<Route path='*' element={<Navigate to='/' replace />} />
 		</Routes>
 	);

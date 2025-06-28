@@ -6,6 +6,7 @@ const usersApi = axios.create({
   baseURL: `${API_BASE_URL}/users`,
 });
 
+//Get all unpublished posts for a specific user
 export const getDraftsByUser = async (token, id) => {
   const res = await usersApi.get(`/${id}`, {
     headers: {
