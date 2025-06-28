@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -72,7 +71,7 @@ export default function Login() {
             Login
           </button>
         </form>
-		
+
 		{/* Easy access to register functionality if needed */}
         <p className="mt-4 text-center text-gray-500">
           Don’t have an account?{' '}
