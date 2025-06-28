@@ -1,16 +1,23 @@
-// src/components/Layout.jsx
 import Navbar from './Navbar';
+import Footer from './Footer';
 import { Outlet } from 'react-router-dom';
 
 export default function Layout() {
-	return (
-		<>
-			<Navbar />
-			<div className='flex justify-center items-start min-h-screen py-16 bg-gray-100'>
-				<div className='bg-white p-6 rounded-lg shadow-md w-full max-w-3xl'>
-					<Outlet />
-				</div>
-			</div>
-		</>
-	);
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+
+      <main className="flex-grow flex justify-center items-center bg-gray-500">
+        <div className="w-full max-w-3xl mx-auto px-6 py-4">
+          <Outlet />
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
+
+
+
+
