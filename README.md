@@ -1,15 +1,15 @@
 # Odin Blog - User Interface
-The front-end for the Odin Blog application, integrated with a custom REST API. Implemented as a submission for the NodeJS course in the Odin Project (full-stack JavaScript track).
+The front end for the Odin Blog application, integrated with a custom REST API (see [odin-blog](https://github.com/ChristianKierna/odin-blog)). The project was implemented as a submission for the NodeJS course in the [Odin Project](https://www.theodinproject.com/).
 
-Odin Blog provides an interface where authenticated users can share and view blog posts, and interact with other user's posts. 
+The Odin Blog front end provides and interface where authenticated users can share and view blog posts, and interact with the posts via comments (GET, POST, UPDATE, DELETE functionality for all posts and comments).
 
-**Link to project:**
-![Project Image](public/smartsnap_6-28-2025_at_11-15-21.png)
+**Deployment:** https://odin-blog-frontend-black.vercel.app/
+![Project Image](public/project-image.png)
 ## Built With
 
 - [Node.js](https://nodejs.org/) – JavaScript runtime
 - [React](https://react.com/) – JavaScript Library
-- [Odin Blog API](https://github.com/ChristianKierna/odin-blog) – Custom API
+- [Odin Blog API](https://github.com/ChristianKierna/odin-blog) – Custom RESTful API
 - [Tailwind CSS](https://tailwindcss.com/) – CSS Framework
 
 ## Lessons Learned
